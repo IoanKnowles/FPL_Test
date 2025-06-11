@@ -1,0 +1,25 @@
+1) Define Goals and Metrics - Clarify what success looks like. Define evaluation metrics (Total FPL points over a season)
+
+2) Setup and Version Control - Create a venv, initialise a github repo, install core libraries
+
+3) Data Acquisition - Identify and connect to APIs for both FPL game data and advanced metrics
+
+4) Data Storage - Architect a local “lake” of raw JSON/CSV downloads, Normalize into relational tables in a lightweight DB (SQLite)
+
+5) Exploratory Data Analysis - Profile distributions of past FPL points, prices, minutes played, visualize correlations between features, 
+identifying missing patterns and outliers
+
+6) Feature engineering - Player Features: Historic points per game, cost changes, form (Rolling Average), Advanced metrics: xG, xA, shot volume. 
+Team/Fixture Features: Strength of upcoming opponents, home vs. away, fixture congestion. Temporal features: Gameweek indicators, double-gameweek flags, blank-gameweek flags.
+
+7) Model Development and Validation - Define target: predicted points per player per Gameweek. Baseline model: Linear Regression. Advanced models: Random Forest, XGBoost, even time-series models. Validation: Use time-series split (e.g. training on GWs 1–n, testing on n+1) to avoid data leakage. 
+
+8) Team Optimization Engine - Formulate selection as an Integer Linear Program: maximize sum(predicted points) subject to budget (100 m), position limits, max 3 players per real club, formation constraints. Solve weekly with PuLP
+
+9) Automation and Pipeline - Build a script or modular pipeline to: Fetch latest data, Recompute features & retrain/update model if needed, Rerun optimization and output recommended squad.
+
+10) Interface and Deployment - simple console script to display/CSV-export picks.
+
+11) Evaluation & Iteration - Track actual vs. predicted points and overall season rank. Revisit feature set, data sources, and model choice based on performance. Incorporate mid-season adjustments (e.g. injuries, transfers).
+
+12) Documentation & Sharing - Write clear docstrings, maintain a README with setup/usage instructions. Publish code on GitHub.

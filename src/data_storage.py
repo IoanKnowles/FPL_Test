@@ -95,7 +95,8 @@ def load_sqlite():
     """Load all Parquet tables into an SQLite database."""
     conn = sqlite3.connect(DB_PATH)
     tables = ['players_2025','players_2024', 'players_2023', 'teams', 'positions', 'fixtures', 'history_2025', 'history_2024','history_2023', 'features']
-    for tbl in tables:
+    tables1 = ['features_2025']
+    for tbl in tables1:
         pq_path = os.path.join(PROC_DIR, f"{tbl}.parquet")
         if os.path.exists(pq_path):
             df = pd.read_parquet(pq_path)
